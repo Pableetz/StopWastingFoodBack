@@ -6,12 +6,12 @@ const authMiddleware = async (req, res, next) => {
       return res.status(401).send({ error: "No token" });
     }
     const token = req.header("Authorization").replace("Bearer ", "");
-    const decoded = jwt.verify(token, process.env.JWT_SECRET); // verifie le token à l'aide de sa clé secrète en .env
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = decoded; // rend disponible le payload du token dans les routes a req.user._id ou req.user.email etc...
+    req.user = decoded;
     console.log(req.user);
 
-    next(); // passe la main au controller si tout est ok
+    next();
   } catch (error) {
     res.status(401).send({ error: "Please authenticate" });
   }

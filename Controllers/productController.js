@@ -9,7 +9,7 @@ const createProduct = async (req, res) => {
 
     await product.save();
 
-    res.status(201).send(product);
+    res.status(201).send({ message: "Product created", product });
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
