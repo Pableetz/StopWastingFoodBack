@@ -97,20 +97,4 @@ Authorization: Bearer <votre_token>
 
 ## 📄 Licence
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
-
-```
-
-Voici les améliorations apportées :
-- Structure claire et organisée
-- Ajout d'émojis pour améliorer la lisibilité
-- Instructions d'installation détaillées
-- Documentation des endpoints principaux
-- Section sur l'authentification
-- Liste des technologies utilisées
-- Prérequis techniques
-- Guide de contribution
-- Section sur la licence
-
-Voulez-vous que je modifie ou ajoute quelque chose ?
-```
+Penser à rajouter un texte Licence voir avec Mathis le boss
