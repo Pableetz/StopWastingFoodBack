@@ -89,11 +89,11 @@ Authorization: Bearer <votre_token>
 
 ## 🤝 Contribution
 
-1. Fork le projet
-2. Créez votre branche (`git checkout -b feature/AmazingFeature`)
-3. Committez vos changements (`git commit -m 'Add: Amazing Feature'`)
-4. Push sur la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrez une Pull Request
+1.
+2.
+3.
+4.
+5.
 
 ## 📄 Licence
 
