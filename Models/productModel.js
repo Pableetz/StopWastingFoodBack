@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const productSchema = new Schema({
-  nom: {
+  name: {
     type: String,
     required: true,
   },
@@ -10,11 +10,11 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
-  quantite: {
+  quantity: {
     type: Number,
     required: true,
   },
-  peremption: {
+  expire_at: {
     type: Date,
     required: true,
   },

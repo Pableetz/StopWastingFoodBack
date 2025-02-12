@@ -19,7 +19,6 @@ const createProduct = async (req, res) => {
 const getProductsByUserId = async (req, res) => {
   try {
     const products = await Product.find({ owner: req.user._id });
-
     res.status(200).send(products);
   } catch (error) {
     res.status(500).send({ error: error.message });
