@@ -18,10 +18,16 @@ const createRecipe = async (req, res) => {
 // Controller pour get les products de l'utilisateur connecté
 const getRecipeById = async (req, res) => {
     try {
-        const recipe = await Product.findOne({ _id: req.params._id });
-        res.status(200).send(recipe);
+        const { id } = req.params; // Récupère l'ID depuis les paramètres de l'URL
+        const recipe = await Recipe.findById(id); // Utilise findById directement
+
+        if (!recipe) {
+            return res.status(404).json({ message: "Recette non trouvée" });
+        }
+
+        res.status(200).json(recipe);
     } catch (error) {
-        res.status(500).send({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
 };
 
