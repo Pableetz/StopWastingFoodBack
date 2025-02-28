@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const {
-    createRecipe,
-    getRecipeById,
-    updateRecipe,
-    deleteRecipe,
-    getRecipes,
+  createRecipe,
+  getRecipeById,
+  updateRecipe,
+  deleteRecipe,
+  getRecipes,
 } = require("../Controllers/recipeController");
 
 const authMiddleware = require("../Middleware/authMiddleware");
