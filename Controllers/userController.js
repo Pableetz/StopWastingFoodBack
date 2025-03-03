@@ -24,20 +24,20 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ pseudo: req.body.pseudo });
 
     if (!user) {
-      return res.status(404).send({ error: "User not found" });
+      return res.status(404).send({ error: "Utilisateur non trouvé" });
     }
 
     const isMatch = await bcrypt.compare(req.body.password, user.password);
 
     if (!isMatch) {
-      return res.status(401).send({ error: "Invalid password" });
+      return res.status(401).send({ error: "Mot de passe invalide" });
     }
 
     const token = jwt.sign(
-      { _id: user._id, email: user.email },
+      { _id: user._id, pseudo: user.pseudo },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
