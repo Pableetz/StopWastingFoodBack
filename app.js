@@ -56,7 +56,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const mongoose = require("mongoose");
 mongoose
-    .connect("mongodb://localhost:27017/stopwastingfood", {})
+    .connect("mongodb+srv://m-legrand91600:Mathis12122001@cluster0.fghxcjm.mongodb.net/stopwastingfood", {})
     .then(() => {
         console.log("Connected to the database!");
     })
@@ -67,6 +67,7 @@ mongoose
 app.use("/users", require("./Routes/userRoutes"));
 app.use("/products", require("./Routes/productRoutes"));
 app.use("/recipes", require("./Routes/recipeRoutes"));
+app.use("/shopping-lists", require("./Routes/shoppingListRoutes"));
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

@@ -9,6 +9,11 @@ const {
 
 const authMiddleware = require("../Middleware/authMiddleware");
 
+router.post("/create", authMiddleware, createCommentaire);
+router.get("/recipe/:id", getCommentairesByRecipeId);
+router.put("/update/:id", authMiddleware, editCommentaireByOwner);
+router.delete("/delete/:id", authMiddleware, deleteCommentaireById);
+
 /**
  * @swagger
  * components:
@@ -72,7 +77,6 @@ const authMiddleware = require("../Middleware/authMiddleware");
  *                 commentaire:
  *                   $ref: '#/components/schemas/Commentaire'
  */
-router.post("/create", authMiddleware, createCommentaire);
 
 /**
  * @swagger
@@ -98,7 +102,6 @@ router.post("/create", authMiddleware, createCommentaire);
  *               items:
  *                 $ref: '#/components/schemas/Commentaire'
  */
-router.get("/recipe/:id", getCommentairesByRecipeId);
 
 /**
  * @swagger
@@ -133,7 +136,6 @@ router.get("/recipe/:id", getCommentairesByRecipeId);
  *             schema:
  *               $ref: '#/components/schemas/Commentaire'
  */
-router.put("/update/:id", authMiddleware, editCommentaireByOwner);
 
 /**
  * @swagger
@@ -165,6 +167,5 @@ router.put("/update/:id", authMiddleware, editCommentaireByOwner);
  *                 commentaire:
  *                   $ref: '#/components/schemas/Commentaire'
  */
-router.delete("/delete/:id", authMiddleware, deleteCommentaireById);
 
 module.exports = router;

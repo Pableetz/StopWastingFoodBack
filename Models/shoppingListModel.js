@@ -8,10 +8,11 @@ const shoppingListSchema = new Schema({
   },
   products: [
     {
-      type: Schema.Types.ObjectId,
-      ref: "Product",
-    },
-    {
+      product: {
+        type: String,
+        required: true,
+      },
+      // ref: "Product",
       quantity: {
         type: Number,
         required: true,

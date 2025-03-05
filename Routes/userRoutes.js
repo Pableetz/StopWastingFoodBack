@@ -8,6 +8,12 @@ const {
   getUsers,
 } = require("../Controllers/userController");
 
+router.get("/all", getUsers);
+router.put("/update/:id", updateUser);
+router.post("/register", registerUser);
+router.post("/login", loginUser);
+router.delete("/delete/:id", deleteUser);
+
 /**
  * @swagger
  * components:
@@ -80,7 +86,6 @@ const {
  *                   type: string
  *                   example: Password is required
  */
-router.post("/register", registerUser);
 
 /**
  * @swagger
@@ -140,7 +145,6 @@ router.post("/register", registerUser);
  *                   type: string
  *                   example: User not found
  */
-router.post("/login", loginUser);
 
 /**
  * @swagger
@@ -191,7 +195,6 @@ router.post("/login", loginUser);
  *                 error:
  *                   type: string
  */
-router.delete("/delete/:id", deleteUser);
 
 /**
  * @swagger
@@ -241,7 +244,6 @@ router.delete("/delete/:id", deleteUser);
  *       500:
  *         description: Erreur serveur
  */
-router.put("/update/:id", updateUser);
 
 /**
  * @swagger
@@ -280,6 +282,5 @@ router.put("/update/:id", updateUser);
  *                 error:
  *                   type: string
  */
-router.get("/all", getUsers);
 
 module.exports = router;

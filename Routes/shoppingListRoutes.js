@@ -4,11 +4,21 @@ const {
   createShoppingList,
   getShoppingListById,
   updateShoppingList,
-  deleteShoppingList,
-  getShoppingListsByOwner,
+  deleteShoppingListById,
+  getAllShoppingLists,
 } = require("../Controllers/shoppingListController");
 
 const authMiddleware = require("../Middleware/authMiddleware");
+
+router.post("/create", authMiddleware, createShoppingList);
+
+router.get("/all", authMiddleware, getAllShoppingLists);
+
+router.get("/:id", authMiddleware, getShoppingListById);
+
+router.patch("/update/:id", authMiddleware, updateShoppingList);
+
+router.delete("/delete/:id", authMiddleware, deleteShoppingListById);
 
 /**
  * @swagger
@@ -90,7 +100,6 @@ const authMiddleware = require("../Middleware/authMiddleware");
  *                 shoppingList:
  *                   $ref: '#/components/schemas/ShoppingList'
  */
-router.post("/create", authMiddleware, createShoppingList);
 
 /**
  * @swagger
@@ -116,7 +125,6 @@ router.post("/create", authMiddleware, createShoppingList);
  *             schema:
  *               $ref: '#/components/schemas/ShoppingList'
  */
-router.get("/:id", authMiddleware, getShoppingListById);
 
 /**
  * @swagger
@@ -148,7 +156,6 @@ router.get("/:id", authMiddleware, getShoppingListById);
  *             schema:
  *               $ref: '#/components/schemas/ShoppingList'
  */
-router.put("/update/:id", authMiddleware, updateShoppingList);
 
 /**
  * @swagger
@@ -180,7 +187,6 @@ router.put("/update/:id", authMiddleware, updateShoppingList);
  *                 shoppingList:
  *                   $ref: '#/components/schemas/ShoppingList'
  */
-router.delete("/delete/:id", authMiddleware, deleteShoppingList);
 
 /**
  * @swagger
@@ -201,6 +207,5 @@ router.delete("/delete/:id", authMiddleware, deleteShoppingList);
  *               items:
  *                 $ref: '#/components/schemas/ShoppingList'
  */
-router.get("/all", authMiddleware, getShoppingListsByOwner);
 
 module.exports = router;
