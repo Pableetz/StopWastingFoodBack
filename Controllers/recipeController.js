@@ -17,9 +17,11 @@ const createRecipe = async (req, res) => {
 
 const getRecipeById = async (req, res) => {
   try {
-    const recipe = await Product.findOne({ _id: req.params._id }).populate(
-      "commentaires"
-    );
+    console.log("id", req.params.id)
+    const recipe = await Recipe.findOne({ _id: req.params.id })
+    //   .populate(
+    //   "comments"
+    // ).setOptions({ strictPopulate: false }).exec();
     res.status(200).send(recipe);
   } catch (error) {
     res.status(500).send({ error: error.message });
@@ -38,7 +40,7 @@ const updateRecipe = async (req, res) => {
       return res.status(404).send({ error: "Recipe not found" });
     }
 
-    res.status(200).send(product);
+    res.status(200).send(recipe);
   } catch (error) {
     res.status(500).send({ error: error.message });
   }
@@ -52,7 +54,7 @@ const deleteRecipe = async (req, res) => {
       return res.status(404).send({ error: "Recipe not found" });
     }
 
-    res.status(200).send({ message: "Recipe deleted", product });
+    res.status(200).send({ message: "Recipe deleted", recipe });
   } catch (error) {
     res.status(500).send({ error: error.message });
   }

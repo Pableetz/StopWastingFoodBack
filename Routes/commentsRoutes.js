@@ -5,7 +5,7 @@ const {
   deleteCommentaireById,
   getCommentairesByRecipeId,
   editCommentaireByOwner,
-} = require("../Controllers/commentaireController");
+} = require("../Controllers/commentsController");
 
 const authMiddleware = require("../Middleware/authMiddleware");
 

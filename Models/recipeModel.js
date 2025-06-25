@@ -4,28 +4,32 @@ const { Schema } = mongoose;
 const recipeSchema = new Schema({
   name: {
     type: String,
-    required: true,
+    required: false,
   },
   time: {
     type: Number,
-    required: true,
+    required: false,
   },
   quantity: {
     type: Number,
-    required: true,
+    required: false,
   },
   category: {
     type: String,
-    required: true,
+    required: false,
   },
   instructions: {
     type: String,
-    required: true,
+    required: false,
   },
   ingredients: {
     type: String,
-    required: true,
+    required: false,
   },
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Comments"
+  }],
   owner: {
     type: Schema.Types.ObjectId,
     ref: "User",

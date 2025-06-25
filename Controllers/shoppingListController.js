@@ -1,7 +1,7 @@
 const ShoppingList = require("../Models/shoppingListModel");
 const User = require("../Models/userModel");
 const Product = require("../Models/productModel");
-const Commentaire = require("../Models/commentaireModel");
+const Commentaire = require("../Models/commentsModel");
 
 const createShoppingList = async (req, res) => {
   try {

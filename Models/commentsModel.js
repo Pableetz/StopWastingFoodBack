@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
-const { create } = require("./recipeModel");
+// const { create } = require("./recipeModel");
 const { Schema } = mongoose;
 
-const commentaireSchema = new Schema({
-  commentaire: {
+const commentSchema = new Schema({
+  message: {
     type: String,
     required: true,
   },
@@ -21,4 +21,4 @@ const commentaireSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Commentaire", commentaireSchema);
+module.exports = mongoose.model("Comments", commentSchema);
