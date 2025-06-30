@@ -8,7 +8,18 @@ const productSchema = new Schema({
   },
   type: {
     type: String,
-    required: true,
+    enum: [
+      "fruits",
+      "legumes",
+      "viandes",
+      "poissons",
+      "produits laitiers",
+      "epices",
+      "céréales",
+      "boissons",
+      "autres",
+    ],
+    default: "autres",
   },
   quantity: {
     type: Number,
