@@ -26,6 +26,11 @@ const productSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+  status: {
+    type: String,
+    enum: ["available", "expired", "consumed"],
+    default: "available",
+  },
 });
 
 module.exports = mongoose.model("Product", productSchema);

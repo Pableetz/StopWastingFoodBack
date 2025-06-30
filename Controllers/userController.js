@@ -24,7 +24,9 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
+    // Couche d'accès aux données
     const user = await User.findOne({ pseudo: req.body.pseudo });
+    //
 
     if (!user) {
       return res.status(404).send({ error: "Utilisateur non trouvé" });
