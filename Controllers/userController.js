@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const User = require("../Models/userModel");
 const jwt = require("jsonwebtoken");
+const sendEmail = require("../Utils/sendEmail");
 
 const registerUser = async (req, res) => {
   try {
@@ -12,6 +13,18 @@ const registerUser = async (req, res) => {
     const user = new User({
       ...req.body,
       password: hashedPassword,
+    });
+
+    await sendEmail({
+      to: user.email,
+      subject: "Bienvenue sur Stop Wasting Food 🥦",
+      html: `
+        <h2>Bienvenue ${user.pseudo || ""} !</h2>
+        <p>Merci de t'être inscrit sur Stop Wasting Food.</p>
+        <p>On est ravi de t'avoir avec nous 🥳</p>
+        <hr />
+        <p>Ton équipe SWF</p>
+      `,
     });
 
     await user.save();

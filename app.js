@@ -5,6 +5,24 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const app = express();
 app.use(express.json());
+const redis = require("redis");
+const redisClient = redis.createClient({
+  url: process.env.REDIS_URL || "redis://localhost:6379",
+});
+
+redisClient
+  .connect()
+  .then(() => {
+    console.log("Connected to Redis!");
+  })
+  .catch((err) => {
+    console.error("Redis connection error:", err);
+  });
+
+app.use((req, res, next) => {
+  req.redisClient = redisClient;
+  next();
+});
 
 const PORT = 8080;
 

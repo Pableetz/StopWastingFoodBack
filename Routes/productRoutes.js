@@ -8,6 +8,7 @@ const {
   deleteProduct,
 } = require("../Controllers/productController");
 const authMiddleware = require("../Middleware/authMiddleware");
+const cacheMiddleware = require("../Middleware/cacheMiddleware");
 
 /**
  * @swagger
@@ -135,7 +136,7 @@ router.get("/all", authMiddleware, getProducts);
  *       401:
  *         description: Non autorisé
  */
-router.get("/myproducts", authMiddleware, getProductsByUserId);
+router.get("/myproducts", authMiddleware, cacheMiddleware, getProductsByUserId);
 
 /**
  * @swagger
