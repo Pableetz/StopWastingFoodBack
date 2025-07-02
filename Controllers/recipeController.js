@@ -85,7 +85,7 @@ const generateRecipes = async (req, res) => {
   const userIngredients = req.body.ingredients;
   console.log("body", req.body);
   console.log("userIngredients", userIngredients);
-  const prompt = `Propose-moi 3 recettes simples à partir de ces ingrédients (tu peux rajouter des ingrédients de base comme riz, pâtes, huile, sel, etc.) :
+  const prompt = `Propose-moi 3 recettes à partir de ces ingrédients (tu peux partir du principe que j'habite dans une maison toute l'année et que j'ai accès à des ingrédients de base comme l'huile d'olive, le sel, le poivre, riz, pates,  etc.) :
 ${userIngredients.join(", ")}.
 
 Je veux que tu m'envoies **une réponse strictement au format JSON**, sans texte d'introduction ni commentaire, sous forme d'un tableau d'objets JSON ( 1objet par recipe ).
