@@ -85,10 +85,31 @@ const generateRecipes = async (req, res) => {
   const userIngredients = req.body.ingredients;
   console.log("body", req.body);
   console.log("userIngredients", userIngredients);
-  const prompt = `Propose-moi 3 recettes simples à partir de ces ingrédients (Tu peux partir du principe que tu peux rajouter des ingrédients de "base" type: riz, pates, huile, sel etc ... ):
-    ${userIngredients.join(
-      ", "
-    )}. Je veux que tu m'envoi une réponse sans texte d'introduction, avec uniquement les recettes sous forme d'objet json comportant : le temps de préparation, le nom de la recette, les ingrédients et les étapes de préparation. Voici un exemple de réponse : { "tempsPreparation": "20 minutes", "nom": "Pâtes à la tomate", "ingredients": ["pâtes", "tomates", "ail"], "etapes": ["Faire cuire les pâtes", "Préparer la sauce tomate"] }`;
+  const prompt = `Propose-moi 3 recettes simples à partir de ces ingrédients (tu peux rajouter des ingrédients de base comme riz, pâtes, huile, sel, etc.) :
+${userIngredients.join(", ")}.
+
+Je veux que tu m'envoies **une réponse strictement au format JSON**, sans texte d'introduction ni commentaire, sous forme d'un tableau d'objets JSON ( 1objet par recipe ).
+Chaque objet doit comporter :
+- "nom" (string),
+- "tempsPreparation" (string),
+- "ingredients" (tableau de chaînes),
+- "etapes" (tableau de chaînes).
+
+Voici un exemple de réponse correcte :
+[
+  {
+    "tempsPreparation": "20 minutes",
+    "nom": "Pâtes à la tomate",
+    "ingredients": ["pâtes", "tomates", "ail"],
+    "etapes": ["Faire cuire les pâtes", "Préparer la sauce tomate"]
+  },
+  {
+    "tempsPreparation": "15 minutes",
+    "nom": "Salade avocat-poulet",
+    "ingredients": ["avocat", "poulet", "salade", "huile d'olive"],
+    "etapes": ["Couper l'avocat et le poulet", "Mélanger avec la salade et l'huile d'olive"]
+  }
+]`;
 
   try {
     const response = await axios.post(
@@ -113,8 +134,29 @@ const generateRecipes = async (req, res) => {
       }
     );
 
-    const result = response.data.choices[0].message.content;
-    res.status(200).send({ recipes: result });
+    let resultRaw = response.data.choices[0].message.content;
+
+    resultRaw = resultRaw.trim();
+
+    // Retirer un bloc ```json ... ```
+    if (resultRaw.startsWith("```json")) {
+      resultRaw = resultRaw.replace(/^```json\s*/, "").replace(/\s*```$/, "");
+    } else if (resultRaw.startsWith("```")) {
+      // Retirer les simples balises ```
+      resultRaw = resultRaw.replace(/^```\s*/, "").replace(/\s*```$/, "");
+    }
+
+    let recipes = [];
+    try {
+      recipes = JSON.parse(resultRaw);
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return res.status(400).send({
+        error: "Invalid response format from OpenAI",
+      });
+    }
+    console.log("Generated recipes:", recipes);
+    res.status(200).send(recipes);
   } catch (error) {
     console.error("Error generating recipes:", error);
     res.status(500).send({ error: "Failed to generate recipes" });

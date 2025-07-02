@@ -5,6 +5,9 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const app = express();
 app.use(express.json());
+
+app.use(cors({ origin: "*" }));
+
 const redis = require("redis");
 const redisClient = redis.createClient({
   url: process.env.REDIS_URL || "redis://localhost:6379",
@@ -27,8 +30,6 @@ app.use((req, res, next) => {
 const PORT = 8080;
 
 dotenv.config();
-
-app.use(cors({ origin: "*" }));
 
 const swaggerOptions = {
   definition: {
